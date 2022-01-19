@@ -3,7 +3,7 @@ from http.client import HTTPResponse
 from django.shortcuts import render
 from blog.forms import PostFormulario
 from blog.models import Comentario, Like, Post, Tag, Usuario
-from blog.forms import PostFormulario
+from blog.forms import TagFormulario
 
 # def usuario(request,id):
 #     usuario=Usuario.objects.get(id=id)
@@ -16,9 +16,9 @@ def posts(request):
     posts=Post.objects.all()
     return render(request, 'post.html', {"posts":posts})
 
-def postFormulario(request):
+def tagFormulario(request):
     if request.method == 'POST':
-        miformulario= PostFormulario(request.POST)
+        miformulario= TagFormulario(request.POST)
         print(miformulario)
         if miformulario.is_valid:
             informacion= miformulario.cleaned_data
@@ -27,9 +27,9 @@ def postFormulario(request):
 
             return render(request,'inicio.html')
     else:
-        miformulario= PostFormulario()
+        miformulario= TagFormulario()
 
-    return render(request, "postFormulario.html", {"miformulario":miformulario})
+    return render(request, "tagFormulario.html", {"miformulario":miformulario})
 
 def busquedaTag(request):
     return render(request, 'busquedaTag.html')
